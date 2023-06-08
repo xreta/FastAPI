@@ -105,7 +105,7 @@ async def fetch_all_trades():
 
 # 2 Fetch a trade by ID
 @app.get("/trades/{trade_id}", status_code=200)
-async def fetch_trade_by(*, trade_id: str) -> dict:
+async def fetch_trade_by(trade_id: str) -> dict:
 
     result = [trade for trade in trades if trade["trade_id"] == trade_id]
     if result:
@@ -133,7 +133,7 @@ def search_trade(
     return results
 
 # 4 Advanced filtering 
-@app.get("/trades", status_code=200, response_model=Page[Trade])
+@app.get("/trades", status_code=200)
 def advance_search_trade(
     assetClass: Optional[str] = None,
     end: Optional[dt.datetime] = None,
